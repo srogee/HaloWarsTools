@@ -110,6 +110,11 @@ namespace HaloWarsTools
                 _ => throw new NotImplementedException()
             };
         }
+
+        public static float ReadHalfLittleEndian(byte[] buffer, int offset) {
+            ushort hf = ReadUInt16LittleEndian(buffer, offset);
+            return SystemHalf.Half.ToHalf(hf);
+        }
     }
 
     public enum BinaryEndianness

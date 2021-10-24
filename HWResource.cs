@@ -13,6 +13,7 @@ namespace HaloWarsTools
         Sc3, // Scenario
         Gls, // Scenario Lighting
         Ugx, // Mesh
+        Vis  // Visual Representation
     }
 
     public class HWResource {
@@ -62,6 +63,7 @@ namespace HaloWarsTools
                 ".sc3" => new HWSc3Resource(filename),
                 ".gls" => new HWGlsResource(filename),
                 ".ugx" => new HWUgxResource(filename),
+                ".vis" => new HWVisResource(filename),
                 _ => null
             };
         }
