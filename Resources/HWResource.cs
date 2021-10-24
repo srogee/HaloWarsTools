@@ -17,40 +17,20 @@ namespace HaloWarsTools
     }
 
     public class HWResource {
-        private static Dictionary<string, HWResource> ResourcesByFilename = new Dictionary<string, HWResource>();
-        private static List<HWResourceAuditEntry> AuditLog = new List<HWResourceAuditEntry>();
+        private static LazyValueCache ResourceCache = new LazyValueCache();
 
         protected LazyValueCache ValueCache;
 
-        private static void AuditResource(HWResource resource, HWResourceAuditEntryType type) {
-            AuditLog.Add(new HWResourceAuditEntry(resource, type));
-        }
-
         public string Filename;
         public HWResourceType Type = HWResourceType.None;
-
-        public string UserFriendlyName
-        {
-            get
-            {
-                return Filename;
-            }
-        }
 
         protected HWResource(string filename) {
             Filename = filename;
             ValueCache = new LazyValueCache();
         }
 
-        public static HWResource GetOrCreateResource(string filename) {
-            if (!ResourcesByFilename.ContainsKey(filename)) {
-                ResourcesByFilename.Add(filename, CreateResource(filename));
-                AuditResource(ResourcesByFilename[filename], HWResourceAuditEntryType.Created);
-            } else {
-                AuditResource(ResourcesByFilename[filename], HWResourceAuditEntryType.Accessed);
-            }
-
-            return ResourcesByFilename[filename];
+        public static HWResource FromFile(string filename) {
+            return ResourceCache.Get(() => CreateResource(filename), filename);
         }
 
         private static HWResource CreateResource(string filename) {
