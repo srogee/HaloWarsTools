@@ -27,7 +27,6 @@ namespace HaloWarsTools
 
         public string Filename;
         public HWResourceType Type = HWResourceType.None;
-        public bool IsLoaded = false;
 
         public string UserFriendlyName
         {
