@@ -6,6 +6,8 @@ namespace HaloWarsTools
 {
     public class HWBinaryResource : HWResource
     {
+        protected HWBinaryResource(string filename) : base(filename) { }
+
         protected byte[] RawBytes => ValueCache.Get(() => File.ReadAllBytes(Filename));
 
         protected HWBinaryResourceChunk[] Chunks => ValueCache.Get(() => {
@@ -26,8 +28,6 @@ namespace HaloWarsTools
 
             return chunks;
         });
-
-        public HWBinaryResource(string filename) : base(filename) { }
 
         protected static HWBinaryResourceChunkType ParseChunkType(ulong type) {
             if (Enum.TryParse(type.ToString(), out HWBinaryResourceChunkType result)) {

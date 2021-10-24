@@ -7,11 +7,13 @@ namespace HaloWarsTools
 {
     public class HWXtdResource : HWBinaryResource
     {
+        public HWXtdResource(string filename) : base(filename) { }
+
         public Bitmap AmbientOcclusionTexture => ValueCache.Get(() => ExtractEmbeddedDXT5A(GetFirstChunkOfType(HWBinaryResourceChunkType.XTD_AOChunk)));
         public Bitmap OpacityTexture => ValueCache.Get(() => ExtractEmbeddedDXT5A(GetFirstChunkOfType(HWBinaryResourceChunkType.XTD_AlphaChunk)));
 
-        public HWXtdResource(string filename) : base(filename) {
-            Type = HWResourceType.Xtd;
+        public static new HWXtdResource FromFile(string filename) {
+            return GetOrCreateFromFile(filename) as HWXtdResource;
         }
 
         private Bitmap ExtractEmbeddedDXT5A(HWBinaryResourceChunk chunk) {

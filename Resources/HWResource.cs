@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace HaloWarsTools
@@ -18,18 +19,26 @@ namespace HaloWarsTools
 
     public class HWResource {
         private static LazyValueCache ResourceCache = new LazyValueCache();
-
         protected LazyValueCache ValueCache;
 
         public string Filename;
         public HWResourceType Type = HWResourceType.None;
 
         protected HWResource(string filename) {
+            if (ResourceCache.Contains(filename)) {
+                // Prevent consumers from just calling new HW***Resource(), which has to be public so we can call it in CreateResource
+                throw new Exception("Resources must be instantiated via a FromFile call");
+            }
+
             Filename = filename;
             ValueCache = new LazyValueCache();
         }
 
         public static HWResource FromFile(string filename) {
+            return GetOrCreateFromFile(filename);
+        }
+
+        protected static HWResource GetOrCreateFromFile(string filename) {
             return ResourceCache.Get(() => CreateResource(filename), filename);
         }
 

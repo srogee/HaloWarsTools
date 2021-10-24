@@ -6,11 +6,13 @@ namespace HaloWarsTools
 {
     public class HWUgxResource : HWBinaryResource
     {
+        public HWUgxResource(string filename) : base(filename) { }
+
         public GenericMesh Mesh => ValueCache.Get(ImportMesh);
         public string[] TextureNames => ValueCache.Get(GetTextureNames);
 
-        public HWUgxResource(string filename) : base(filename) {
-            Type = HWResourceType.Ugx;
+        public static new HWUgxResource FromFile(string filename) {
+            return GetOrCreateFromFile(filename) as HWUgxResource;
         }
 
         private bool ShouldStopScanning(char value) {
