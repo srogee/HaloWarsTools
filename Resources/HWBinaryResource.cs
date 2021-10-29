@@ -6,9 +6,7 @@ namespace HaloWarsTools
 {
     public class HWBinaryResource : HWResource
     {
-        protected HWBinaryResource(string filename) : base(filename) { }
-
-        protected byte[] RawBytes => ValueCache.Get(() => File.ReadAllBytes(Filename));
+        protected byte[] RawBytes => ValueCache.Get(() => File.ReadAllBytes(AbsolutePath));
 
         protected HWBinaryResourceChunk[] Chunks => ValueCache.Get(() => {
             uint headerSize = BinaryUtils.ReadUInt32BigEndian(RawBytes, 4);

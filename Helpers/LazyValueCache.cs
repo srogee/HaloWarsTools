@@ -29,7 +29,7 @@ namespace HaloWarsTools
 
             if (!CachedValues.TryGetValue(key, out dynamic value)) {
                 value = loadFunction();
-                Set(key, value);
+                Set<T>(key, value);
             }
 
             return value;

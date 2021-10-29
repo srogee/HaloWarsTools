@@ -5,9 +5,7 @@ namespace HaloWarsTools
 {
     public class HWXmlResource : HWResource
     {
-        protected HWXmlResource(string filename) : base(filename) { }
-
-        protected XElement XmlData => ValueCache.Get(() => XElement.Load(Filename));
+        protected XElement XmlData => ValueCache.Get(() => XElement.Load(AbsolutePath));
 
         protected static Vector3 DeserializeVector3(string value) {
             string[] components = value.Split(",");

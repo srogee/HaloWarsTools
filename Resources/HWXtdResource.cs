@@ -9,14 +9,11 @@ namespace HaloWarsTools
     public class HWXtdResource : HWBinaryResource
     {
         public GenericMesh Mesh => ValueCache.Get(ImportMesh);
-
-        public HWXtdResource(string filename) : base(filename) { }
-
         public Bitmap AmbientOcclusionTexture => ValueCache.Get(() => ExtractEmbeddedDXT5A(GetFirstChunkOfType(HWBinaryResourceChunkType.XTD_AOChunk)));
         public Bitmap OpacityTexture => ValueCache.Get(() => ExtractEmbeddedDXT5A(GetFirstChunkOfType(HWBinaryResourceChunkType.XTD_AlphaChunk)));
 
-        public static new HWXtdResource FromFile(string filename) {
-            return GetOrCreateFromFile(filename) as HWXtdResource;
+        public static new HWXtdResource FromFile(HWContext context, string filename) {
+            return GetOrCreateFromFile(context, filename) as HWXtdResource;
         }
 
         private Bitmap ExtractEmbeddedDXT5A(HWBinaryResourceChunk chunk) {
@@ -85,7 +82,7 @@ namespace HaloWarsTools
 
         private GenericMesh ImportMesh() {
             int stride = 1;
-            MeshNormalExportMode shadingMode = MeshNormalExportMode.CalculateNormalsSmoothShaded;
+            MeshNormalExportMode shadingMode = MeshNormalExportMode.Unchanged;
 
             HWBinaryResourceChunk headerChunk = GetFirstChunkOfType(HWBinaryResourceChunkType.XTD_XTDHeader);
             float tileScale = BinaryUtils.ReadFloatBigEndian(RawBytes, (int)headerChunk.Offset + 12);

@@ -2,10 +2,8 @@
 {
     public class HWScnResource : HWXmlResource
     {
-        public HWScnResource(string filename) : base(filename) { }
-
-        public static new HWScnResource FromFile(string filename) {
-            return GetOrCreateFromFile(filename) as HWScnResource;
+        public static new HWScnResource FromFile(HWContext context, string filename) {
+            return GetOrCreateFromFile(context, filename) as HWScnResource;
         }
     }
 }

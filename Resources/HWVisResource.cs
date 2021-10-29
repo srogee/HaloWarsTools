@@ -2,10 +2,8 @@
 {
     class HWVisResource : HWXmlResource
     {
-        public HWVisResource(string filename) : base(filename) { }
-
-        public static new HWVisResource FromFile(string filename) {
-            return GetOrCreateFromFile(filename) as HWVisResource;
+        public static new HWVisResource FromFile(HWContext context, string filename) {
+            return GetOrCreateFromFile(context, filename) as HWVisResource;
         }
     }
 }

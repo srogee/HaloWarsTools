@@ -8,13 +8,10 @@ namespace HaloWarsTools
 {
     public class HWXttResource : HWBinaryResource
     {
-        public HWXttResource(string filename) : base(filename) { }
-
         public Bitmap AlbedoTexture => ValueCache.Get(() => ExtractEmbeddedDXT1(GetFirstChunkOfType(HWBinaryResourceChunkType.XTT_AtlasChunkAlbedo)));
-        
 
-        public static new HWXttResource FromFile(string filename) {
-            return GetOrCreateFromFile(filename) as HWXttResource;
+        public static new HWXttResource FromFile(HWContext context, string filename) {
+            return GetOrCreateFromFile(context, filename) as HWXttResource;
         }
 
         private Bitmap ExtractEmbeddedDXT1(HWBinaryResourceChunk chunk) {
