@@ -9,11 +9,11 @@ namespace HaloWarsTools
     class HWModel
     {
         public string Name;
-        public HWUgxResource MeshResource;
+        public HWUgxResource Resource;
 
-        public HWModel(string name, HWUgxResource meshResource) {
+        public HWModel(string name, HWUgxResource resource) {
             Name = name;
-            MeshResource = meshResource;
+            Resource = resource;
         }
     }
 }

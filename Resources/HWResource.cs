@@ -52,13 +52,12 @@ namespace HaloWarsTools
         });
 
         protected static Matrix4x4 MeshMatrix = new Matrix4x4(0, -1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1);
-
         protected LazyValueCache ValueCache;
-        protected HWContext Context;
-        protected string RelativePath;
 
+        public HWContext Context { get; protected set; }
+        public string RelativePath { get; protected set; }
         public string AbsolutePath => Context.GetAbsolutePath(RelativePath);
-        public HWResourceType Type = HWResourceType.None;
+        public HWResourceType Type;
 
         public override string ToString() {
             return $"{Path.ChangeExtension(RelativePath, null)} [{Type.ToString().ToUpperInvariant()}]";

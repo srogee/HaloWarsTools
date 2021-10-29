@@ -39,8 +39,8 @@ namespace HaloWarsTools
             Console.WriteLine($"Processed {vis}");
 
             foreach (var model in vis.Models) {
-                model.MeshResource.Mesh.Export(Path.Combine(outputDirectory, Path.GetFileName(model.MeshResource.AbsolutePath)), GenericMeshExportFormat.Obj);
-                Console.WriteLine($"Processed {model.MeshResource}");
+                model.Resource.Mesh.Export(Path.Combine(outputDirectory, Path.GetFileName(model.Resource.AbsolutePath)), GenericMeshExportFormat.Obj);
+                Console.WriteLine($"Processed {model.Resource}");
             }
         }
     }
