@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Numerics;
 
 namespace HaloWarsTools
 {
@@ -41,6 +42,8 @@ namespace HaloWarsTools
             { ".vis", new HWResourceTypeDefinition(HWResourceType.Vis, typeof(HWVisResource)) },
         };
 
+        protected static Matrix4x4 MeshMatrix = new Matrix4x4(0, -1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1);
+
         protected LazyValueCache ValueCache;
         protected HWContext Context;
         protected string RelativePath;
@@ -49,7 +52,7 @@ namespace HaloWarsTools
         public HWResourceType Type = HWResourceType.None;
 
         public override string ToString() {
-            return $"{Type.ToString().ToUpperInvariant()} {Path.ChangeExtension(RelativePath, null)}";
+            return $"{Path.ChangeExtension(RelativePath, null)} [{Type.ToString().ToUpperInvariant()}]";
         }
 
         protected HWResource() {

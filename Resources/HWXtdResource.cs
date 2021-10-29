@@ -115,9 +115,9 @@ namespace HaloWarsTools
 
                     // Positions are relative to the terrain grid, so shift them by the grid position
                     position += new Vector3(x, 0, z) * tileScale;
-                    mesh.Vertices.Add(ConvertToUE4PositionVectorTerrain(position));
+                    mesh.Vertices.Add(ConvertPositionVector(position));
 
-                    Vector3 normal = ConvertToUE4DirectionVector(Vector3.Normalize(ReadVector3Compressed(normalOffset + offset) * 2.0f - Vector3.One));
+                    Vector3 normal = ConvertDirectionVector(Vector3.Normalize(ReadVector3Compressed(normalOffset + offset) * 2.0f - Vector3.One));
                     mesh.Normals.Add(normal);
 
                     // Simple UV based on original, non-warped terrain grid
@@ -165,15 +165,11 @@ namespace HaloWarsTools
             return new Vector3(x, y, z) / kBitMask10;
         }
 
-        private static Vector3 ConvertToUE4PositionVector(Vector3 vector) {
-            return new Vector3(vector.Z, vector.X, vector.Y) * 100;
+        private static Vector3 ConvertPositionVector(Vector3 vector) {
+            return new Vector3(vector.X, -vector.Z, vector.Y);
         }
 
-        private static Vector3 ConvertToUE4PositionVectorTerrain(Vector3 vector) {
-            return new Vector3(vector.X, -vector.Z, vector.Y) * 100;
-        }
-
-        private static Vector3 ConvertToUE4DirectionVector(Vector3 vector) {
+        private static Vector3 ConvertDirectionVector(Vector3 vector) {
             return new Vector3(vector.Z, vector.X, vector.Y);
         }
     }

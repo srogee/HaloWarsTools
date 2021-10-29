@@ -352,6 +352,9 @@ namespace HaloWarsTools
                 }
             }
 
+            var options = new MeshExportOptions(MeshMatrix, MeshNormalExportMode.Unchanged, false, false);
+            mesh.ApplyExportOptions(options);
+
             return mesh;
         }
 

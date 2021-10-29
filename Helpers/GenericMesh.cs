@@ -21,7 +21,7 @@ namespace HaloWarsTools
         public bool ReverseFaceWinding;
         public Matrix4x4 Matrix;
 
-        public MeshExportOptions(Matrix4x4 matrix, MeshNormalExportMode normalExportMode, bool invertNormals, bool reverseFaceWinding) {
+        public MeshExportOptions(Matrix4x4 matrix, MeshNormalExportMode normalExportMode = MeshNormalExportMode.Unchanged, bool invertNormals = false, bool reverseFaceWinding = false) {
             Matrix = matrix;
             NormalExportMode = normalExportMode;
             InvertNormals = invertNormals;
