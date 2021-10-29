@@ -13,7 +13,7 @@ namespace HaloWarsTools
         public Bitmap OpacityTexture => ValueCache.Get(() => ExtractEmbeddedDXT5A(GetFirstChunkOfType(HWBinaryResourceChunkType.XTD_AlphaChunk)));
 
         public static new HWXtdResource FromFile(HWContext context, string filename) {
-            return GetOrCreateFromFile(context, filename) as HWXtdResource;
+            return GetOrCreateFromFile(context, filename, HWResourceType.Xtd) as HWXtdResource;
         }
 
         private Bitmap ExtractEmbeddedDXT5A(HWBinaryResourceChunk chunk) {

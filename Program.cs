@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 
 namespace HaloWarsTools
 {
     class Program
     {
         static void Main(string[] args) {
-            // TODO
-            // Make sure all meshes (terrain + ugx) use the same coordinate system
-            string inputDirectory = "C:\\Users\\rid3r\\Desktop\\PhoenixTools\\extract";
-            string outputDirectory = "C:\\Users\\rid3r\\Desktop\\HaloWarsTools";
+            string inputDirectory = "C:\\Users\\rid3r\\Documents\\HaloWarsTools\\input";
+            string outputDirectory = "C:\\Users\\rid3r\\Documents\\HaloWarsTools\\output";
 
             var context = new HWContext(inputDirectory);
 
@@ -23,10 +22,6 @@ namespace HaloWarsTools
             xtd.OpacityTexture.Save(Path.Combine(outputDirectory, "blood_gulch_opacity.png"), ImageFormat.Png);
             xtd.Mesh.Export(Path.Combine(outputDirectory, "blood_gulch_vismesh.obj"), GenericMeshExportFormat.Obj);
             Console.WriteLine($"Processed {xtd}");
-
-            var ugx = HWUgxResource.FromFile(context, "art\\covenant\\building\\builder_01\\builder_hologram_01.ugx");
-            ugx.Mesh.Export(Path.Combine(outputDirectory, "builder_hologram_01.obj"), GenericMeshExportFormat.Obj);
-            Console.WriteLine($"Processed {ugx}");
 
             var gls = HWGlsResource.FromFile(context, "scenario\\skirmish\\design\\blood_gulch\\blood_gulch.gls");
             Console.WriteLine($"Processed {gls}");
@@ -42,6 +37,11 @@ namespace HaloWarsTools
 
             var vis = HWVisResource.FromFile(context, "art\\covenant\\building\\builder_03\\builder_03.vis");
             Console.WriteLine($"Processed {vis}");
+
+            foreach (var model in vis.Models) {
+                model.MeshResource.Mesh.Export(Path.Combine(outputDirectory, Path.GetFileName(model.MeshResource.AbsolutePath)), GenericMeshExportFormat.Obj);
+                Console.WriteLine($"Processed {model.MeshResource}");
+            }
         }
     }
 }

@@ -31,6 +31,7 @@ namespace HaloWarsTools
  
     public class HWResource {
         private static LazyValueCache ResourceCache = new LazyValueCache();
+        private static LazyValueCache StaticValuesCache = new LazyValueCache();
         private static Dictionary<string, HWResourceTypeDefinition> TypeDefinitions = new Dictionary<string, HWResourceTypeDefinition>() {
             { ".xtt", new HWResourceTypeDefinition(HWResourceType.Xtt, typeof(HWXttResource)) },
             { ".xtd", new HWResourceTypeDefinition(HWResourceType.Xtd, typeof(HWXtdResource)) },
@@ -41,6 +42,14 @@ namespace HaloWarsTools
             { ".ugx", new HWResourceTypeDefinition(HWResourceType.Ugx, typeof(HWUgxResource)) },
             { ".vis", new HWResourceTypeDefinition(HWResourceType.Vis, typeof(HWVisResource)) },
         };
+
+        private static Dictionary<HWResourceType, string> TypeExtensions => StaticValuesCache.Get(() => {
+            var dictionary = new Dictionary<HWResourceType, string>();
+            foreach (var kvp in TypeDefinitions) {
+                dictionary.Add(kvp.Value.Type, kvp.Key);
+            }
+            return dictionary;
+        });
 
         protected static Matrix4x4 MeshMatrix = new Matrix4x4(0, -1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1);
 
@@ -63,7 +72,12 @@ namespace HaloWarsTools
             return GetOrCreateFromFile(context, filename);
         }
 
-        protected static HWResource GetOrCreateFromFile(HWContext context, string filename) {
+        protected static HWResource GetOrCreateFromFile(HWContext context, string filename, HWResourceType expectedType = HWResourceType.None) {
+            // Set the extension based on the resource type if the filename doesn't have one
+            if (string.IsNullOrEmpty(Path.GetExtension(filename)) && TypeExtensions.TryGetValue(expectedType, out string defaultExtension)) {
+                filename = Path.ChangeExtension(filename, defaultExtension);
+            }
+
             return ResourceCache.Get(() => CreateResource(context, filename), filename);
         }
 

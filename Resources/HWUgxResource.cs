@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Numerics;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace HaloWarsTools
         public string[] TextureNames => ValueCache.Get(GetTextureNames);
 
         public static new HWUgxResource FromFile(HWContext context, string filename) {
-            return GetOrCreateFromFile(context, filename) as HWUgxResource;
+            return GetOrCreateFromFile(context, filename, HWResourceType.Ugx) as HWUgxResource;
         }
 
         private bool ShouldStopScanning(char value) {

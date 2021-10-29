@@ -8,6 +8,10 @@ namespace HaloWarsTools
 {
     public class HWGlsResource : HWXmlResource
     {
+        public static new HWGlsResource FromFile(HWContext context, string filename) {
+            return GetOrCreateFromFile(context, filename, HWResourceType.Gls) as HWGlsResource;
+        }
+
         public Vector3 SunDirection => ValueCache.Get(() => {
             float sunInclination = (float)XmlData.Descendants("sunInclination").First();
             float sunRotation = (float)XmlData.Descendants("sunRotation").First();
@@ -16,10 +20,6 @@ namespace HaloWarsTools
 
         public Color SunColor => ValueCache.Get(() => GetColor("setTerrainColor"));
         public Color BackgroundColor => ValueCache.Get(() => GetColor("backgroundColor"));
-
-        public static new HWGlsResource FromFile(HWContext context, string filename) {
-            return GetOrCreateFromFile(context, filename) as HWGlsResource;
-        }
 
         private Color GetColor(string name) {
             return ConvertVector3ToColor(DeserializeVector3(XmlData.Descendants(name).First().Value));
