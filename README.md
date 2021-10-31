@@ -2,23 +2,27 @@
 WIP library to read Halo Wars Definitive Edition files and convert them to common formats for exporting to game engines, 3d modeling software, etc. Based off the binary templates in the [HaloWarsDocs](https://github.com/HaloMods/HaloWarsDocs) repository.
 
 ## Supported File Formats
-* `.xtd` - Terrain data
+* `.xtd` - Terrain visual data
   * Mesh
   * Ambient Occlusion map
   * Opacity map
-* `.xtt` - Terrain data
+* `.xtt` - Terrain texture data
   * Albedo map
-* `.ugx` - Mesh data
+* `.ugx` - Universal geometry data
   * Vertex positions/normals/texcoords
   * Materials (limited support)
   * Submeshes
   * Texture paths
-* `.vis` - Visual represention
+* `.vis` - Visual data
   * Meshes
-* `.gls` - Lighting?
+* `.gls` - Global light data
   * Sun inclination/rotation/color
   * Background color
-* `.scn`/`.sc2`/`.sc3` - Scenario data
+* `.scn` - Main scenario data
+  * (No support yet)
+* `.sc2` - Scenario decoration objects
+  * (No support yet)
+* `.sc3` - Scenario sound objects
   * (No support yet)
 
 ## How To Use
@@ -30,5 +34,6 @@ WIP library to read Halo Wars Definitive Edition files and convert them to commo
 6. Open the `.sln`, change the input/output paths, and run the example
 
 ## Notes
+* You will need to clone the HaloWarsDocs repository into the same directory and build PhxTools.sln for automatic `.xmb` extraction to work. Here's what Visual Studio components you need to build that solution:
+  * ![Requirements](https://raw.githubusercontent.com/srogee/HaloWarsTools/main/Requirements.png?token=ABIQA63R5UYXEVYD7K7SLWDBRBMPW)
 * Textures not mentioned above are stored in various DDS formats and will need to be manually converted for now.
-* `.vis`, `.gls`, `.scn`, `.sc2`, and `.sc3` are all stored as binary XML files (`.xmb`) and will need to be manually converted by dragging them into PhxGui for now.
