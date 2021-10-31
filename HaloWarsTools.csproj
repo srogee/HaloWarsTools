@@ -17,4 +17,13 @@
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="KSoft">
+      <HintPath>..\HaloWarsDocs\PhxTools\_bin\v160\Debug\AnyCPU\Phoenix\KSoft.dll</HintPath>
+    </Reference>
+    <Reference Include="KSoft.Phoenix">
+      <HintPath>..\HaloWarsDocs\PhxTools\_bin\v160\Debug\AnyCPU\Phoenix\KSoft.Phoenix.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
