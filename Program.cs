@@ -2,16 +2,19 @@
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using HaloWarsTools.Helpers;
 
 namespace HaloWarsTools
 {
     class Program
     {
         static void Main(string[] args) {
-            string inputDirectory = "C:\\Users\\rid3r\\Documents\\HaloWarsTools\\input";
+            string gameDirectory = "Z:\\SteamLibrary\\steamapps\\common\\HaloWarsDE";
+            string scratchDirectory = "C:\\Users\\rid3r\\Documents\\HaloWarsTools\\scratch";
             string outputDirectory = "C:\\Users\\rid3r\\Documents\\HaloWarsTools\\output";
 
-            var context = new HWContext(inputDirectory);
+            var context = new HWContext(gameDirectory, scratchDirectory);
+            PhoenixUtils.ExpandAllEraFilesInDirectory(context.GameInstallDirectory, context.ScratchDirectory);
 
             var xtt = HWXttResource.FromFile(context, "scenario\\skirmish\\design\\blood_gulch\\blood_gulch.xtt");
             xtt.AlbedoTexture.Save(Path.Combine(outputDirectory, "blood_gulch_albedo.png"), ImageFormat.Png);

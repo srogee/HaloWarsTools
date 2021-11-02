@@ -56,7 +56,7 @@ namespace HaloWarsTools
 
         public HWContext Context { get; protected set; }
         public string RelativePath { get; protected set; }
-        public string AbsolutePath => Context.GetAbsolutePath(RelativePath);
+        public string AbsolutePath => Context.GetAbsoluteScratchPath(RelativePath);
         public HWResourceType Type;
 
         public override string ToString() {

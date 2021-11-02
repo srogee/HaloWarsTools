@@ -4,17 +4,28 @@ namespace HaloWarsTools
 {
     public class HWContext
     {
-        public string Directory;
-        public HWContext(string directory) {
-            Directory = directory;
+        public string GameInstallDirectory;
+        public string ScratchDirectory;
+
+        public HWContext(string gameInstallDirectory, string scratchDirectory) {
+            GameInstallDirectory = gameInstallDirectory;
+            ScratchDirectory = scratchDirectory;
         }
 
-        public string GetAbsolutePath(string relativePath) {
-            return Path.Combine(Directory, relativePath);
+        public string GetAbsoluteGamePath(string relativePath) {
+            return Path.Combine(GameInstallDirectory, relativePath);
         }
 
-        public string GetRelativePath(string absolutePath) {
-            return Path.GetRelativePath(Directory, absolutePath);
+        public string GetRelativeGamePath(string absolutePath) {
+            return Path.GetRelativePath(GameInstallDirectory, absolutePath);
+        }
+
+        public string GetAbsoluteScratchPath(string relativePath) {
+            return Path.Combine(ScratchDirectory, relativePath);
+        }
+
+        public string GetRelativeScratchPath(string absolutePath) {
+            return Path.GetRelativePath(ScratchDirectory, absolutePath);
         }
     }
 }

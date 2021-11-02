@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Numerics;
 using System.Xml.Linq;
+using HaloWarsTools.Helpers;
 
 namespace HaloWarsTools
 {
@@ -14,14 +15,7 @@ namespace HaloWarsTools
         }
 
         XElement Load() {
-            string xmlFile = AbsolutePath;
-            string xmbFile = xmlFile + ".xmb";
-
-            if (!File.Exists(xmlFile)) {
-                KSoft.Phoenix.Resource.ResourceUtils.ConvertXmbToXml(xmlFile, xmbFile, KSoft.Shell.EndianFormat.Big, KSoft.Shell.ProcessorSize.x64);
-            }
-            
-            return XElement.Load(xmlFile);
+            return XElement.Load(AbsolutePath);
         }
     }
 }
