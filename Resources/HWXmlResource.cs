@@ -1,7 +1,5 @@
-﻿using System.IO;
-using System.Numerics;
+﻿using System.Numerics;
 using System.Xml.Linq;
-using HaloWarsTools.Helpers;
 
 namespace HaloWarsTools
 {

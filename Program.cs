@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using HaloWarsTools.Helpers;
 
 namespace HaloWarsTools
 {
