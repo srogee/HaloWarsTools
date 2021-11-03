@@ -1,7 +1,11 @@
 # HaloWarsTools
-WIP library to read Halo Wars Definitive Edition files and convert them to common formats for exporting to game engines, 3d modeling software, etc. Based off the binary templates in the [HaloWarsDocs](https://github.com/HaloMods/HaloWarsDocs) repository.
+WIP library to read Halo Wars Definitive Edition files and convert them to common formats for exporting to game engines, 3d modeling software, etc. Based off the binary templates and projects found in the [HaloWarsDocs](https://github.com/HaloMods/HaloWarsDocs) repository.
 
 ## Supported File Formats
+* `.era` - Ensemble Resource Archive
+  * Compressed + encrypted files
+* `.xmb` - XML Binary file
+  * XML text context
 * `.xtd` - Terrain visual data
   * Mesh
   * Ambient Occlusion map
