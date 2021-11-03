@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace HaloWarsTools
 {
-    class HWVisResource : HWXmlResource
+    public class HWVisResource : HWXmlResource
     {
         public HWModel[] Models => ValueCache.Get(ImportModels);
 

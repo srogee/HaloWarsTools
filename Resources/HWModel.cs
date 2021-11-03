@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HaloWarsTools
 {
-    class HWModel
+    public class HWModel
     {
         public string Name;
         public HWUgxResource Resource;

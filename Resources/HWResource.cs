@@ -5,6 +5,8 @@ using System.Numerics;
 
 namespace HaloWarsTools
 {
+    // TODO put value cache in HWContext
+
     public enum HWResourceType
     {
         None,
@@ -30,7 +32,6 @@ namespace HaloWarsTools
     }
  
     public class HWResource {
-        private static LazyValueCache ResourceCache = new LazyValueCache();
         private static LazyValueCache StaticValuesCache = new LazyValueCache();
         private static Dictionary<string, HWResourceTypeDefinition> TypeDefinitions = new Dictionary<string, HWResourceTypeDefinition>() {
             { ".xtt", new HWResourceTypeDefinition(HWResourceType.Xtt, typeof(HWXttResource)) },
@@ -77,7 +78,7 @@ namespace HaloWarsTools
                 filename = Path.ChangeExtension(filename, defaultExtension);
             }
 
-            return ResourceCache.Get(() => CreateResource(context, filename), filename);
+            return context.ResourceCache.Get(() => CreateResource(context, filename), filename);
         }
 
         private static HWResource CreateResource(HWContext context, string filename) {

@@ -30,12 +30,15 @@ namespace HaloWarsTools
             Console.WriteLine($"Processed {gls}");
 
             var scn = HWScnResource.FromFile(context, "scenario\\skirmish\\design\\blood_gulch\\blood_gulch.scn");
+            PrintScenarioObjects(scn);
             Console.WriteLine($"Processed {scn}");
 
             var sc2 = HWSc2Resource.FromFile(context, "scenario\\skirmish\\design\\blood_gulch\\blood_gulch.sc2");
+            PrintScenarioObjects(sc2);
             Console.WriteLine($"Processed {sc2}");
 
             var sc3 = HWSc3Resource.FromFile(context, "scenario\\skirmish\\design\\blood_gulch\\blood_gulch.sc3");
+            PrintScenarioObjects(sc3);
             Console.WriteLine($"Processed {sc3}");
 
             var vis = HWVisResource.FromFile(context, "art\\covenant\\building\\builder_03\\builder_03.vis");
@@ -44,6 +47,12 @@ namespace HaloWarsTools
             foreach (var model in vis.Models) {
                 model.Resource.Mesh.Export(Path.Combine(outputDirectory, Path.GetFileName(model.Resource.AbsolutePath)), GenericMeshExportFormat.Obj);
                 Console.WriteLine($"Processed {model.Resource}");
+            }
+        }
+
+        static void PrintScenarioObjects(HWScnResource scenario) {
+            foreach (var obj in scenario.Objects) {
+                Console.WriteLine($"\t{obj}");
             }
         }
     }
