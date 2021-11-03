@@ -19,21 +19,34 @@ WIP library to read Halo Wars Definitive Edition files and convert them to commo
   * Sun inclination/rotation/color
   * Background color
 * `.scn` - Main scenario data
-  * (No support yet)
+  * Object positions/rotations
 * `.sc2` - Scenario decoration objects
-  * (No support yet)
+  * Object positions/rotations
 * `.sc3` - Scenario sound objects
-  * (No support yet)
+  * Object positions/rotations
 
 ## How To Use
-1. Download [PhxTools](https://github.com/HaloMods/HaloWarsDocs/releases)
-2. Run `PhxGui.exe`
-3. Set `ERA Expand Path` to where you want to store extracted game files
-4. Drag `.era` files from your HaloWarsDE folder into PhxGui to extract them
-5. Clone this repository or download it as a `.zip`
-6. Open the `.sln`, change the input/output paths, and run the example
+1. Clone this repository
+2. Clone (not download as zip) [HaloWarsDocs](https://github.com/HaloMods/HaloWarsDocs) so that your folder structure looks like this:
+```
+Some Folder
+    HaloWarsDocs
+    HaloWarsTools
+```
+3. Make sure the following Visual Studio components are installed:
+
+![Requirements](https://raw.githubusercontent.com/srogee/HaloWarsTools/main/Requirements.png?token=ABIQA63R5UYXEVYD7K7SLWDBRBMPW)
+
+4. Build `HaloWarsDocs\PhxTools\PhxTools.sln`
+5. Open `HaloWarsTools\HaloWarsTools.sln`
+6. In `Program.cs`, change the following paths so that they point to the right places on your machine
+```
+string gameDirectory = "Z:\\SteamLibrary\\steamapps\\common\\HaloWarsDE";
+string scratchDirectory = "C:\\Users\\rid3r\\Documents\\HaloWarsTools\\scratch";
+string outputDirectory = "C:\\Users\\rid3r\\Documents\\HaloWarsTools\\output";
+```
+8. Build and run the solution!
+
 
 ## Notes
-* You will need to clone the HaloWarsDocs repository into the same directory and build PhxTools.sln for automatic `.xmb` extraction to work. Here's what Visual Studio components you need to build that solution:
-  * ![Requirements](https://raw.githubusercontent.com/srogee/HaloWarsTools/main/Requirements.png?token=ABIQA63R5UYXEVYD7K7SLWDBRBMPW)
 * Textures not mentioned above are stored in various DDS formats and will need to be manually converted for now.
