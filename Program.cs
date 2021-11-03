@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Drawing.Imaging;
 using System.IO;
+using HaloWarsTools.Helpers;
 
 namespace HaloWarsTools
 {
     class Program
     {
         static void Main(string[] args) {
+            string gameDirectory = null;
+
+            if (OperatingSystem.IsWindows()) {
+                gameDirectory = SteamInterop.GetGameInstallDirectory("HaloWarsDE");
+                Console.WriteLine($"Found Halo Wars Definitive Edition install at {gameDirectory}");
+            }
+            
             // Change these to be valid for your machine
-            string gameDirectory = "Z:\\SteamLibrary\\steamapps\\common\\HaloWarsDE";
             string scratchDirectory = "C:\\Users\\rid3r\\Documents\\HaloWarsTools\\scratch";
             string outputDirectory = "C:\\Users\\rid3r\\Documents\\HaloWarsTools\\output";
 
