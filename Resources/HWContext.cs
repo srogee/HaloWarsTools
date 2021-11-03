@@ -59,5 +59,43 @@ namespace HaloWarsTools
         public string GetRelativeScratchPath(string absolutePath) {
             return Path.GetRelativePath(ScratchDirectory, absolutePath);
         }
+
+        public bool UnpackEra(string relativeEraPath) {
+            if (IsEraUnpacked(relativeEraPath)) {
+                return false;
+            }
+
+            var absoluteEraPath = GetAbsoluteGamePath(relativeEraPath);
+            var expander = new KSoft.Phoenix.Resource.EraFileExpander(absoluteEraPath);
+
+            expander.Options.Set(KSoft.Phoenix.Resource.EraFileUtilOptions.x64);
+            expander.Options.Set(KSoft.Phoenix.Resource.EraFileUtilOptions.SkipVerification);
+
+            expander.ExpanderOptions.Set(KSoft.Phoenix.Resource.EraFileExpanderOptions.Decrypt);
+            expander.ExpanderOptions.Set(KSoft.Phoenix.Resource.EraFileExpanderOptions.DontOverwriteExistingFiles);
+            expander.ExpanderOptions.Set(KSoft.Phoenix.Resource.EraFileExpanderOptions.DecompressUIFiles);
+            expander.ExpanderOptions.Set(KSoft.Phoenix.Resource.EraFileExpanderOptions.TranslateGfxFiles);
+
+            if (!expander.Read()) {
+                return false;
+            }
+
+            if (!expander.ExpandTo(ScratchDirectory, Path.GetFileNameWithoutExtension(absoluteEraPath))) {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool IsEraUnpacked(string relativeEraPath) {
+            return File.Exists(Path.Combine(ScratchDirectory, Path.ChangeExtension(Path.GetFileName(relativeEraPath), ".eradef")));
+        }
+
+        public void ExpandAllEraFiles() {
+            var files = Directory.GetFiles(GameInstallDirectory, "*.era");
+            foreach (var eraFile in files) {
+                UnpackEra(GetRelativeGamePath(eraFile));
+            }
+        }
     }
 }

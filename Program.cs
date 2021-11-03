@@ -9,13 +9,18 @@ namespace HaloWarsTools
     class Program
     {
         static void Main(string[] args) {
+            // Change these to be valid for your machine
             string gameDirectory = "Z:\\SteamLibrary\\steamapps\\common\\HaloWarsDE";
             string scratchDirectory = "C:\\Users\\rid3r\\Documents\\HaloWarsTools\\scratch";
             string outputDirectory = "C:\\Users\\rid3r\\Documents\\HaloWarsTools\\output";
 
+            // Point the framework to the game install and working directories
             var context = new HWContext(gameDirectory, scratchDirectory);
-            PhoenixUtils.ExpandAllEraFilesInDirectory(context.GameInstallDirectory, context.ScratchDirectory);
 
+            // Expand all compressed/encrypted game files. This also handles the .xmb -> .xml conversion
+            context.ExpandAllEraFiles();
+
+            // Test importing various game resource types
             var xtt = HWXttResource.FromFile(context, "scenario\\skirmish\\design\\blood_gulch\\blood_gulch.xtt");
             xtt.AlbedoTexture.Save(Path.Combine(outputDirectory, "blood_gulch_albedo.png"), ImageFormat.Png);
             Console.WriteLine($"Processed {xtt}");
