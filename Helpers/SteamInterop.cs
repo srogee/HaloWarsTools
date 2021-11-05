@@ -10,7 +10,7 @@ using Microsoft.Win32;
 
 namespace HaloWarsTools.Helpers
 {
-    class SteamInterop
+    public class SteamInterop
     {
         [SupportedOSPlatform("windows")]
         // From https://github.com/pekempy/Breeze/blob/master/Models/ExeSearch.cs
