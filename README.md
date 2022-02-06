@@ -37,10 +37,11 @@ Some Folder
     HaloWarsDocs
     HaloWarsTools
 ```
-3. Make sure the following Visual Studio components are installed:
-
-![Requirements](https://raw.githubusercontent.com/srogee/HaloWarsTools/main/Requirements.png?token=ABIQA63R5UYXEVYD7K7SLWDBRBMPW)
-
+3. Make sure the following Visual Studio components are installed by running the Visual Studio installer again:
+   * Text Template Transformation
+   * Visual Studio SDK
+   * Modeling SDK
+   * .NET Framework 4.8 targeting pack
 4. Build `HaloWarsDocs\PhxTools\PhxTools.sln`. You may have to change an assembly reference to get it to compile, I think I had to replace the TextTransform assembly reference with a newer one.
 5. Open `HaloWarsTools\HaloWarsTools.sln`
 6. In `Program.cs`, change the following paths so that they point to the right places on your machine
